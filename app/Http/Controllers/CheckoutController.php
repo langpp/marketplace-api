@@ -144,36 +144,6 @@ class CheckoutController extends Controller
         ], 200);
     }
 
-    public function update(Request $request){
-        $input  = $request->only("tanggal", "deskripsi", "total", "status", "jenis_pembayaran", "id_checkout"); //Specify Request
-
-        $validation = Validator::make($input, [
-            "tanggal" => "required|string",
-            "deskripsi" => "required|string",
-            "total" => "required|string",
-            "status" => "required|string",
-            "jenis_pembayaran" => "required|string",
-        ]);
-        $id_checkout = $request->input("id_checkout");
-        if ($validation->fails()) {
-            return response($validation->errors()->toJson(), 400);
-        }
-
-        $data = Checkout::where("id_checkout", $id_checkout)->update($input);
-
-        if ($data) {
-            $message = "Data successfully updated.";
-        } else {
-            $message = "Data failed updated.";
-        }
-
-        return response()->json([
-            'success' => true,
-            'message' => $message,
-            'data' => $input
-        ], 200);
-    }
-
     public function delete(Request $request)
     {
         $delete = Checkout::where('id_checkout', $request->id_checkout)->delete();

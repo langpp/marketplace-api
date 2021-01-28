@@ -52,3 +52,7 @@ $router->group(["prefix" => "checkout", "middleware" => ["jwtadmin.auth"]], func
 	$router->post("/update", "CheckoutController@update");
 	$router->delete("/delete", "CheckoutController@delete");
 });
+
+$router->group(["prefix" => "payment", "middleware" => ["jwtadmin.auth"]], function() use ($router){
+	$router->post("/midtrans", "MidtransController@getSnapToken");
+});

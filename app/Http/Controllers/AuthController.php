@@ -87,8 +87,14 @@ class AuthController extends Controller
                     "email" => $user->email,
                     "username" => $user->username,
                     "role" => $user->role,
-                    "no_telp" => $user->no_telp,
+                    "phone" => $user->phone,
                     "id_user" => $user->id_user,
+                    "first_name" => $user->first_name,
+                    "last_name" => $user->last_name,
+                    "address" => $user->address,
+                    "city" => $user->city,
+                    "postal_code" => $user->postal_code,
+                    "country_code" => $user->country_code,
                 ],
                 'token' => $this->jwt($user->id_user, $user->role)
             ], 200);
@@ -110,25 +116,44 @@ class AuthController extends Controller
     {
         $this->validate($request, [
             'username' => 'required|unique:users|max:255',
-            'email' => 'required|max:255',
+            'email' => 'required|unique:users|max:255',
             'role' => 'required',
-            'no_telp' => 'required',
-            'password' => 'required|min:6'
+            'phone' => 'required',
+            'password' => 'required|min:6',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'postal_code' => 'required',
+            'country_code' => 'required',
+
         ]);
  
         $email = $request->input("email");
         $password = $request->input("password");
         $role = $request->input("role");
-        $no_telp = $request->input("no_telp");
+        $phone = $request->input("phone");
         $username = $request->input("username");
+        $first_name = $request->input("first_name");
+        $last_name = $request->input("last_name");
+        $address = $request->input("address");
+        $city = $request->input("city");
+        $postal_code = $request->input("postal_code");
+        $country_code = $request->input("country_code");
  
         $hashPwd = Hash::make($password);
  
         $data = [
             "email" => $email,
             "role" => $role,
-            "no_telp" => $no_telp,
+            "phone" => $phone,
             "username" => $username,
+            "first_name" => $first_name,
+            "last_name" => $last_name,
+            "address" => $address,
+            "city" => $city,
+            "postal_code" => $postal_code,
+            "country_code" => $country_code,
             "password" => $hashPwd
         ];
         

@@ -11,4 +11,8 @@ class Toko extends Model
 	protected $fillable = [
         'id_toko', 'nama_toko', 'id_user', 'deskripsi', 'logo', 'background'
     ];
+    protected $hidden = [
+		'created_at',
+		'updated_at'
+	];
 }
