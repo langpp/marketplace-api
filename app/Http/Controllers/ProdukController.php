@@ -268,4 +268,22 @@ class ProdukController extends Controller
             'message' => "Data successfully deleted.",
         ], 200);
     }
+
+    public function find(Request $request)
+    {
+        $carian = $request->keyword;
+        $find = Produk::where('nama_produk', 'like',"%".$carian."%")->orderby('id_produk', 'DESC')->get();
+        if ($find->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => "Data not found."
+            ], 400);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => "Data found.",
+            'data' => $find
+        ], 200);
+    }
 }

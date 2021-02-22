@@ -35,6 +35,7 @@ $router->group(["prefix" => "toko", "middleware" => ["jwtadmin.auth"]], function
 $router->get("/produk/{id_produk}", "ProdukController@produkbyid");
 $router->get("/produk/toko/{id_toko}", "ProdukController@produkbyidtoko");
 $router->get("/produk", "ProdukController@produkall");
+$router->get("/findproduk", "ProdukController@find");
 
 $router->group(["prefix" => "produk", "middleware" => ["jwtadmin.auth"]], function() use ($router){
 	$router->post("/add", "ProdukController@create");
